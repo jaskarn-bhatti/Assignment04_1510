@@ -45,6 +45,18 @@ def describe_current_location(board, character):
         i += 1
 
 
+def get_user_choice():
+    print("\nMove")
+    print("West: w  North: n  East: e  South: s")
+    movement_number = str(input("Enter direction: "))
+    movement_number = movement_number.lower()
+    if movement_number == 'w' or movement_number == 'n' or movement_number == 'e' or movement_number == 's':
+        return movement_number
+    else:
+        print("Enter movement direction again")
+        get_user_choice()
+
+
 def game():  # called from main
     print("Gravestone Circus")
     the_big_top()
@@ -68,23 +80,22 @@ def game():  # called from main
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-    print(board)
+    # print(board)
 
     # Make character profile
     character = make_character(user_name)
-    print(character)
+    # print(character)
 
-    # achieved_goal = False
-    # while not achieved_goal:
-    # Tell the user where they are
-    describe_current_location(board, character)
+    achieved_goal = False
+    while not achieved_goal:
+        # Tell the user where they are
+        describe_current_location(board, character)
 
-
-    # 5
-    # direction = get_user_choice( )
-    # valid_move = validate_move(board, character, direction)
-    # if valid_move:
-    # move_character(character)
+        # 5
+        direction = get_user_choice()
+        # valid_move = validate_move(board, character, direction)
+        # if valid_move:
+        # move_character(character)
     # describe_current_location(board, character)
     # there_is_a_challenge = check_for_challenges()
     # if there_is_a_challenge:
