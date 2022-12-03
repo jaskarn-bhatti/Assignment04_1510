@@ -3,8 +3,8 @@ Jaskarn
 Student number: A01328100
 """
 
-
 from art import the_big_top
+
 
 def make_board(rows, columns):
     a = {}
@@ -18,6 +18,22 @@ def make_character(user_name):
     user_stats = {"Name": user_name, "X-coordinate": 0, "Y-coordinate": 0, "Current HP": 10, "Attack Damage": 5}
     return user_stats
 
+
+def describe_current_location(board, character):
+    character_pos = (character.get("X-coordinate"), character.get("Y-coordinate"))
+    board_key = list(board.keys())
+    current_board = []
+    for size in range(len(board_key)):
+        if character_pos == board_key[size]:
+            current_board.append('0')
+        else:
+            current_board.append('X')
+
+    i = 0
+    while i < 5:
+        print(current_board[0:5])
+        del current_board[0:5]
+        i += 1
 
 
 def game():  # called from main
@@ -37,10 +53,11 @@ def game():  # called from main
     character = make_character(user_name)
     print(character)
 
-    achieved_goal = False
-    while not achieved_goal:
+    # achieved_goal = False
+    # while not achieved_goal:
     # Tell the user where they are
     describe_current_location(board, character)
+
 
     # 5
     # direction = get_user_choice( )
