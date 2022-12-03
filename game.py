@@ -10,7 +10,12 @@ def make_board(rows, columns):
     a = {}
     for length in range(columns):
         for width in range(rows):
-            a[length, width] = "Empty room"
+            if length == 1 and width == 1 or length == 4 and width == 2:
+                a[length, width] = "Quest"
+            elif length == 0 and width == 4:
+                a[length, width] = "Boss"
+            else:
+                a[length, width] = "Empty room"
     return a
 
 
@@ -26,6 +31,10 @@ def describe_current_location(board, character):
     for size in range(len(board_key)):
         if character_pos == board_key[size]:
             current_board.append('0')
+        elif board.get(board_key[size]) == "Quest":
+            current_board.append('Q')
+        elif board.get(board_key[size]) == "Boss":
+            current_board.append('F')
         else:
             current_board.append('X')
 
@@ -37,11 +46,23 @@ def describe_current_location(board, character):
 
 
 def game():  # called from main
-    print("Escape The Circus")
+    print("Gravestone Circus")
     the_big_top()
+    print("April 13, 1990 you go out to watch magical monkey preform.")
+    print("You arrive at the Circus to find yourself the only one in attendance.")
+    print("As the show begins you see a big flash.")
+    print("Your eyes open to realize that the exit is guarded by a giant monkey\n")
+    print("Escape the Gravestone Circus !!!")
     print("Hello adventure")
-    print("Enter your name: ")
-    user_name = input()
+    user_name = input("Enter your name: ")
+    print("\nGame Rules:")
+    print("Go around the map to fight the quest.")
+    print("If you are feeling lucky challenge the finial boss!")
+    print("Map details:")
+    print("0 = players current position")
+    print("X = spots on map")
+    print("Q = Quest")
+    print("F = Finial Boss\n")
 
     # makes board dictionary
     rows = 5
