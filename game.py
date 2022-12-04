@@ -124,7 +124,7 @@ def execute_challenge_protocol(character):
                 character["Current HP"] = character["Current HP"] - clown_stats["Attack Damage"]
                 print("\nThe clown did 2 damage.")
                 print("Your HP:", character["Current HP"])
-                print("You did", character["Attack Damage"] ,"damage")
+                print("You did", character["Attack Damage"], "damage")
                 print("Clown HP:", clown_stats["Current HP"])
             elif move == 2:
                 clown_stats["Current HP"] = clown_stats["Current HP"] - math.floor(character["Attack Damage"] * 0.8)
@@ -145,6 +145,7 @@ def execute_challenge_protocol(character):
                 print("You lost -2 HP for wrong number.")
                 print("Your HP:", character["Current HP"])
                 print("Clown HP:", clown_stats["Current HP"])
+
 
 def final_boss(character):
     print("\nBattle")
@@ -182,7 +183,7 @@ def final_boss(character):
                 print("You did", math.floor(character["Attack Damage"] * 0.8), "damage")
                 print("Monkey HP:", monkey_stats["Current HP"])
             elif move == 3:
-                print("\nYou can not run from the Bosssssss!")
+                print("\nYou can not run from the Boss!")
                 print("You got attacked for trying to run -5 HP.")
                 character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
                 print("Your HP:", character["Current HP"])
@@ -194,10 +195,12 @@ def final_boss(character):
                 print("Your HP:", character["Current HP"])
                 print("Monkey HP:", monkey_stats["Current HP"])
 
+
 def dead():
     print("\nyou fought a good fight.")
     death()
     print("GAME OVER")
+
 
 def game():  # called from main
     print("Gravestone Circus")
@@ -239,7 +242,7 @@ def game():  # called from main
             there_is_a_challenge = check_for_quest(character, board)
             if there_is_a_challenge:
                 health_check = execute_challenge_protocol(character)
-                if health_check == True:
+                if health_check:
                     dead()
                     achieved_goal = True
             elif board[character["X-coordinate"], character["Y-coordinate"]] == "Boss":
