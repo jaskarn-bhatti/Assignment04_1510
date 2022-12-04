@@ -81,6 +81,15 @@ def move_character(character, direction):
     else:
         character["Y-coordinate"] = character["Y-coordinate"] + 1
 
+def check_for_quest(character, board):
+    if board[character["X-coordinate"], character["Y-coordinate"]] == "Quest":
+        return True
+    else:
+        return False
+
+def execute_challenge_protocol(character):
+    print("Battle")
+    print("Fight the monkey to ")
 
 def game():  # called from main
     print("Gravestone Circus")
@@ -124,10 +133,9 @@ def game():  # called from main
 
         if valid_move:
             move_character(character, direction)
-    # describe_current_location(board, character)
-    # there_is_a_challenge = check_for_challenges()
-    # if there_is_a_challenge:
-    # execute_challenge_protocol(character)
+            there_is_a_challenge = check_for_quest(character, board)
+            if there_is_a_challenge:
+                execute_challenge_protocol(character)
     # if character_has_leveled():
     # execute_glow_up_protocol()
     # achieved_goal = check_if_goal_attained(board, character)
