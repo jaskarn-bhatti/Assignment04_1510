@@ -109,8 +109,8 @@ def game():  # called from main
         direction = get_user_choice()
         valid_move = validate_move(board, character, direction)
         print(valid_move)
-        # if valid_move:
-        # move_character(character)
+        if valid_move:
+            move_character(character)
     # describe_current_location(board, character)
     # there_is_a_challenge = check_for_challenges()
     # if there_is_a_challenge:
