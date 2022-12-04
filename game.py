@@ -56,6 +56,20 @@ def get_user_choice():
         print("Enter movement direction again")
         get_user_choice()
 
+def validate_move(board, character, direction):
+    if direction == "n":
+        if character["X-coordinate"] - 1 < 0:
+            return False
+    elif direction == "s":
+        if character["X-coordinate"] + 1 > 4:
+            return False
+    elif direction == "w":
+       if character["Y-coordinate"] - 1 < 0:
+           return False
+    elif direction == "e":
+        if character["Y-coordinate"] + 1 > 4:
+            return False
+    return True
 
 def game():  # called from main
     print("Gravestone Circus")
@@ -80,11 +94,11 @@ def game():  # called from main
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-    # print(board)
+    print(board)
 
     # Make character profile
     character = make_character(user_name)
-    # print(character)
+    print(character)
 
     achieved_goal = False
     while not achieved_goal:
@@ -93,7 +107,8 @@ def game():  # called from main
 
         # 5
         direction = get_user_choice()
-        # valid_move = validate_move(board, character, direction)
+        valid_move = validate_move(board, character, direction)
+        print(valid_move)
         # if valid_move:
         # move_character(character)
     # describe_current_location(board, character)
