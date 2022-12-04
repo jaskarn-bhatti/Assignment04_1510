@@ -56,7 +56,7 @@ def get_user_choice():
         print("Enter movement direction again")
         get_user_choice()
 
-def validate_move(board, character, direction):
+def validate_move(character, direction):
     if direction == "n":
         if character["X-coordinate"] - 1 < 0:
             return False
@@ -70,6 +70,17 @@ def validate_move(board, character, direction):
         if character["Y-coordinate"] + 1 > 4:
             return False
     return True
+
+def move_character(character, direction):
+    if direction == "n":
+        character["X-coordinate"] = character["X-coordinate"] - 1
+    elif direction == "s":
+        character["X-coordinate"] = character["X-coordinate"] + 1
+    elif direction == "w":
+        character["Y-coordinate"] = character["Y-coordinate"] - 1
+    else:
+        character["Y-coordinate"] = character["Y-coordinate"] + 1
+
 
 def game():  # called from main
     print("Gravestone Circus")
@@ -107,10 +118,12 @@ def game():  # called from main
 
         # 5
         direction = get_user_choice()
-        valid_move = validate_move(board, character, direction)
+        # remove board
+        valid_move = validate_move(character, direction)
         print(valid_move)
+
         if valid_move:
-            move_character(character)
+            move_character(character, direction)
     # describe_current_location(board, character)
     # there_is_a_challenge = check_for_challenges()
     # if there_is_a_challenge:
