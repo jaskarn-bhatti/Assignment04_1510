@@ -6,6 +6,8 @@ Student number: A01328100
 from art import the_big_top
 from art import clown
 from art import monkey
+from art import firework
+from art import death
 import math
 
 
@@ -111,6 +113,8 @@ def execute_challenge_protocol(character):
             character["Attack Damage"] += 1
             print("Player stats\nHP:", character["Current HP"], "\nAttack Damage:", character["Attack Damage"], "\n")
             clown_dead = True
+        elif character["Current HP"] <= 0:
+            return True
         else:
             print("\nMoves\npunch: 1 kick: 2 run: 3 ")
             move = int(input("Enter move: "))
@@ -144,11 +148,56 @@ def execute_challenge_protocol(character):
 
 def final_boss(character):
     print("\nBattle")
-    print("Fight the clown to death")
-    mokey()
-    clown_stats = {"Current HP": 10, "Attack Damage": 2}
+    print("Fight the Monkey to death")
+    monkey()
+    monkey_stats = {"Current HP": 40, "Attack Damage": 5}
 
+    monkey_dead = False
+    while not monkey_dead:
+        if monkey_stats["Current HP"] <= 0:
+            print("congratulations", character["Name"], "You escaped the Gravestone Circus!")
+            firework()
+            return True
+        # elif character["Current HP"] <= 0:
+        #     return False
+        elif character["Current HP"] <= 0:
+            dead()
+            return True
+        else:
+            print("\nMoves\npunch: 1 kick: 2 run: 3 ")
+            move = int(input("Enter move: "))
 
+            if move == 1:
+                monkey_stats["Current HP"] = monkey_stats["Current HP"] - character["Attack Damage"]
+                character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
+                print("\nThe Monkey did 5 damage.")
+                print("Your HP:", character["Current HP"])
+                print("You did", character["Attack Damage"], "damage")
+                print("Monkey HP:", monkey_stats["Current HP"])
+            elif move == 2:
+                monkey_stats["Current HP"] = monkey_stats["Current HP"] - math.floor(character["Attack Damage"] * 0.8)
+                character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
+                print("\nThe Monkey did 5 damage.")
+                print("Your HP:", character["Current HP"])
+                print("You did", math.floor(character["Attack Damage"] * 0.8), "damage")
+                print("Monkey HP:", monkey_stats["Current HP"])
+            elif move == 3:
+                print("\nYou can not run from the Bosssssss!")
+                print("You got attacked for trying to run -5 HP.")
+                character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
+                print("Your HP:", character["Current HP"])
+                print("Monkey HP:", monkey_stats["Current HP"])
+            else:
+                print("\nWrong number!!!")
+                character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
+                print("You lost -5 HP for wrong number.")
+                print("Your HP:", character["Current HP"])
+                print("Monkey HP:", monkey_stats["Current HP"])
+
+def dead():
+    print("\nyou fought a good fight.")
+    death()
+    print("GAME OVER")
 
 def game():  # called from main
     print("Gravestone Circus")
@@ -189,13 +238,15 @@ def game():  # called from main
             move_character(character, direction)
             there_is_a_challenge = check_for_quest(character, board)
             if there_is_a_challenge:
-                execute_challenge_protocol(character)
+                health_check = execute_challenge_protocol(character)
+                if health_check == True:
+                    dead()
+                    achieved_goal = True
             elif board[character["X-coordinate"], character["Y-coordinate"]] == "Boss":
-                final_boss(character)
+                achieved_goal = final_boss(character)
     # achieved_goal = check_if_goal_attained(board, character)
     # else:
-    # # Print end of game stuff like congratulations or sorry you died
-    #
+    # Print end of game stuff like congratulations or sorry you died
 
 
 def main():
