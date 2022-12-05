@@ -58,6 +58,8 @@ def get_user_choice():
     movement_number = movement_number.lower()
     if movement_number == 'w' or movement_number == 'n' or movement_number == 'e' or movement_number == 's':
         return movement_number
+    elif movement_number == "quit":
+        return "quit"
     else:
         print("Enter movement direction again")
         get_user_choice()
@@ -235,6 +237,9 @@ def game():  # called from main
         describe_current_location(board, character)
 
         direction = get_user_choice()
+        if direction == 'quit':
+            print("You quit the game")
+            achieved_goal = True
         valid_move = validate_move(character, direction)
 
         if valid_move:
