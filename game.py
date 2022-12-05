@@ -26,7 +26,7 @@ def make_board(rows, columns):
 
 def make_character(user_name):
     user_stats = {"Name": user_name, "X-coordinate": 0, "Y-coordinate": 0, "Current HP": 10, "Attack Damage": 5,
-                  "level": 1}
+                  "level": 0}
     return user_stats
 
 
@@ -153,7 +153,7 @@ def final_boss(character):
     print("\nBattle")
     print("Fight the Monkey to death")
     monkey()
-    monkey_stats = {"Current HP": 40, "Attack Damage": 5}
+    monkey_stats = {"Current HP": 20, "Attack Damage": 5}
 
     monkey_dead = False
     while not monkey_dead:
