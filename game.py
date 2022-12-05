@@ -9,6 +9,7 @@ from art import monkey
 from art import firework
 from art import death
 import math
+import itertools
 
 
 def make_board(rows, columns):
@@ -110,10 +111,10 @@ def execute_challenge_protocol(character):
         if clown_stats["Current HP"] <= 0:
             print("\nClown has been killed.")
             character["level"] += 1
-            print("You have leveled up to level", character["level"])
+            print("You have leveled up to level %s" % character["level"])
             character["Current HP"] += 5
             character["Attack Damage"] += 1
-            print("Player stats\nHP:", character["Current HP"], "\nAttack Damage:", character["Attack Damage"], "\n")
+            print("Player stats\nHP: %s \nAttack Damage: %s\n" % (character["Current HP"], character["Attack Damage"]))
             clown_dead = True
         elif character["Current HP"] <= 0:
             return True
@@ -125,28 +126,28 @@ def execute_challenge_protocol(character):
                 clown_stats["Current HP"] = clown_stats["Current HP"] - character["Attack Damage"]
                 character["Current HP"] = character["Current HP"] - clown_stats["Attack Damage"]
                 print("\nThe clown did 2 damage.")
-                print("Your HP:", character["Current HP"])
-                print("You did", character["Attack Damage"], "damage")
-                print("Clown HP:", clown_stats["Current HP"])
+                print("Your HP: %s" % character["Current HP"])
+                print("You did %s damage" % character["Attack Damage"])
+                print("Clown HP: %s" % clown_stats["Current HP"])
             elif move == 2:
                 clown_stats["Current HP"] = clown_stats["Current HP"] - math.floor(character["Attack Damage"] * 0.8)
                 character["Current HP"] = character["Current HP"] - clown_stats["Attack Damage"]
                 print("\nThe clown did 2 damage.")
-                print("Your HP:", character["Current HP"])
-                print("You did", math.floor(character["Attack Damage"] * 0.8), "damage")
-                print("Clown HP:", clown_stats["Current HP"])
+                print("Your HP: %s" % character["Current HP"])
+                print("You did %s damage" % math.floor(character["Attack Damage"] * 0.8))
+                print("Clown HP: %s" % clown_stats["Current HP"])
             elif move == 3:
                 print("\nYou can not run from a clown.")
                 print("You got clowned for trying to run -2 HP.")
                 character["Current HP"] = character["Current HP"] - clown_stats["Attack Damage"]
-                print("Your HP:", character["Current HP"])
-                print("Clown HP:", clown_stats["Current HP"])
+                print("Your HP: %s" % character["Current HP"])
+                print("Clown HP: %s" % clown_stats["Current HP"])
             else:
                 print("\nWrong number!!!")
                 character["Current HP"] = character["Current HP"] - clown_stats["Attack Damage"]
                 print("You lost -2 HP for wrong number.")
-                print("Your HP:", character["Current HP"])
-                print("Clown HP:", clown_stats["Current HP"])
+                print("Your HP: %s" % character["Current HP"])
+                print("Clown HP: %s" % clown_stats["Current HP"])
 
 
 def final_boss(character):
@@ -158,11 +159,9 @@ def final_boss(character):
     monkey_dead = False
     while not monkey_dead:
         if monkey_stats["Current HP"] <= 0:
-            print("congratulations", character["Name"], "You escaped the Gravestone Circus!")
+            print("congratulations %s you escaped the Gravestone Circus!" % character["Name"])
             firework()
             return True
-        # elif character["Current HP"] <= 0:
-        #     return False
         elif character["Current HP"] <= 0:
             dead()
             return True
@@ -174,28 +173,28 @@ def final_boss(character):
                 monkey_stats["Current HP"] = monkey_stats["Current HP"] - character["Attack Damage"]
                 character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
                 print("\nThe Monkey did 5 damage.")
-                print("Your HP:", character["Current HP"])
-                print("You did", character["Attack Damage"], "damage")
-                print("Monkey HP:", monkey_stats["Current HP"])
+                print("Your HP: %s" % character["Current HP"])
+                print("You did %s damage" % character["Attack Damage"])
+                print("Monkey HP: %s" % monkey_stats["Current HP"])
             elif move == 2:
                 monkey_stats["Current HP"] = monkey_stats["Current HP"] - math.floor(character["Attack Damage"] * 0.8)
                 character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
                 print("\nThe Monkey did 5 damage.")
-                print("Your HP:", character["Current HP"])
-                print("You did", math.floor(character["Attack Damage"] * 0.8), "damage")
-                print("Monkey HP:", monkey_stats["Current HP"])
+                print("Your HP: %s" % character["Current HP"])
+                print("You did %s damage" % math.floor(character["Attack Damage"] * 0.8) )
+                print("Monkey HP: %s" % monkey_stats["Current HP"])
             elif move == 3:
                 print("\nYou can not run from the Boss!")
                 print("You got attacked for trying to run -5 HP.")
                 character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
-                print("Your HP:", character["Current HP"])
-                print("Monkey HP:", monkey_stats["Current HP"])
+                print("Your HP: %s" % character["Current HP"])
+                print("Monkey HP: %s" % monkey_stats["Current HP"])
             else:
                 print("\nWrong number!!!")
                 character["Current HP"] = character["Current HP"] - monkey_stats["Attack Damage"]
                 print("You lost -5 HP for wrong number.")
-                print("Your HP:", character["Current HP"])
-                print("Monkey HP:", monkey_stats["Current HP"])
+                print("Your HP: %s" % character["Current HP"])
+                print("Monkey HP: %s" % monkey_stats["Current HP"])
 
 
 def dead():
